@@ -65,5 +65,23 @@ namespace MovieTickets.Controllers
             await _service.UpdateAsync(id,actor);
             return RedirectToAction(nameof(Index));
         }
+
+        //Get: Actors/Delete
+        public async Task<IActionResult> Delete(int id)
+        {
+            var actorsDetails = await _service.GetByIdAsync(id);
+            if (actorsDetails == null) return View("NotFound");
+            return View(actorsDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var actorsDetails = await _service.GetByIdAsync(id);
+            if (actorsDetails == null) return View("NotFound");
+
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
