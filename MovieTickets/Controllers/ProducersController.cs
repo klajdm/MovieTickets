@@ -17,5 +17,14 @@ namespace MovieTickets.Controllers
             var data = await _service.GetAllAsync();
             return View(data);
         }
+
+        //Get: Actors/Details/1
+        public async Task<IActionResult> Details(int id)
+        {
+            var producersDetails = await _service.GetByIdAsync(id);
+
+            if (producersDetails == null) return View("NotFound");
+            return View(producersDetails);
+        }
     }
 }
