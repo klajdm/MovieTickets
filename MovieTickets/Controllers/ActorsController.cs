@@ -42,8 +42,28 @@ namespace MovieTickets.Controllers
         {
             var actorsDetails = await _service.GetByIdAsync(id);
 
-            if(actorsDetails == null) return View("empty");
+            if(actorsDetails == null) return View("Empty");
             return View(actorsDetails);
+        }
+
+        //Get: Actors/Edit
+        public async Task<IActionResult> Edit(int id)
+        {
+            var actorsDetails = await _service.GetByIdAsync(id);
+            if (actorsDetails == null) return View("NotFound");
+            return View(actorsDetails);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,ProfilePictureUrl,Bio")] Actor actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+
+            await _service.UpdateAsync(id,actor);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
