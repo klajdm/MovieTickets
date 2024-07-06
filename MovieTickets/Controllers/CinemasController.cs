@@ -47,9 +47,9 @@ namespace MovieTickets.Controllers
         //Get: Cinemas/Edit/1
         public async Task<IActionResult> Edit(int id)
         {
-            var cinemasDetails = await _service.GetByIdAsync(id);
-            if (cinemasDetails == null) return View("NotFound");
-            return View(cinemasDetails);
+            var cinemaDetails = await _service.GetByIdAsync(id);
+            if (cinemaDetails == null) return View("NotFound");
+            return View(cinemaDetails);
         }
 
         [HttpPost]
@@ -63,6 +63,24 @@ namespace MovieTickets.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(cinema);
+        }
+
+        //Get: Producers/Delete/1
+        public async Task<IActionResult> Delete(int id)
+        {
+            var cinemaDetails = await _service.GetByIdAsync(id);
+            if (cinemaDetails == null) return View("NotFound");
+            return View(cinemaDetails);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var cinemaDetails = await _service.GetByIdAsync(id);
+            if (cinemaDetails == null) return View("NotFound");
+
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
