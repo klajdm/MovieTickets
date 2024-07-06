@@ -25,5 +25,15 @@ namespace MovieTickets.Controllers
             return View(movieDetails);
         }
 
+        //Get: Movies/Create
+
+        public IActionResult Create()
+        {
+            ViewData["Welcome"] = "Welcome to our store";
+            ViewBag.Description = "this is the store Description";
+
+            return View();
+        }
+
     }
 }
