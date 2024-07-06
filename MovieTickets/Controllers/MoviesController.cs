@@ -19,6 +19,18 @@ namespace MovieTickets.Controllers
             var data = await _service.GetAllAsync(n => n.Cinema);
             return View(data);
         }
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var allMovies = await _service.GetAllAsync(n => n.Cinema);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResult = allMovies.Where(n => n.Name.ToLower().Contains(searchString.ToLower()) || n.Description.ToLower().Contains(searchString.ToLower())).ToList();
+                return View("Index", filteredResult);
+            }
+
+            return View("Index", allMovies);
+        }
 
         //GET: Movies/Details/1
         public async Task<IActionResult> Details(int id)
