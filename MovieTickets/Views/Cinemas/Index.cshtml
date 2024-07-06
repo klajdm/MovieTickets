@@ -33,9 +33,9 @@
                         </td>
                         <td class="align-middle"> @Html.DisplayFor(modelItem => item.Description)</td>
                         <td class="align-middle text-center">
-                            <a class="btn btn-light shadow-sm"><i class="bi bi-pencil-square"></i></a>  |
+                            <a class="btn btn-light shadow-sm" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>  |
                             <a class="btn btn-light shadow-sm" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i></a>  |
-                            <a class="btn btn-light shadow-sm"><i class="bi bi-trash text-danger"></i></a>
+                            <a class="btn btn-light shadow-sm" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash text-danger"></i></a>
 
                         </td>
                     </tr>
