@@ -46,7 +46,7 @@ namespace MovieTickets.Controllers
             return View(actorsDetails);
         }
 
-        //Get: Actors/Edit
+        //Get: Actors/Edit/1
         public async Task<IActionResult> Edit(int id)
         {
             var actorsDetails = await _service.GetByIdAsync(id);
@@ -66,7 +66,7 @@ namespace MovieTickets.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //Get: Actors/Delete
+        //Get: Actors/Delete/1
         public async Task<IActionResult> Delete(int id)
         {
             var actorsDetails = await _service.GetByIdAsync(id);
