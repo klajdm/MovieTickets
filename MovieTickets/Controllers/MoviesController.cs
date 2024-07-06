@@ -14,7 +14,7 @@ namespace MovieTickets.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var data = await _service.GetAllAsync();
+            var data = await _service.GetAllAsync(n => n.Cinema);
             return View(data);
         }
     }
