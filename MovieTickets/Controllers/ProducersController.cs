@@ -43,5 +43,26 @@ namespace MovieTickets.Controllers
             await _service.AddAsync(producer);
             return RedirectToAction(nameof(Index));
         }
+
+        //Get: Producers/Edit
+        public async Task<IActionResult> Edit(int id)
+        {
+            var producersDetails = await _service.GetByIdAsync(id);
+            if (producersDetails == null) return View("NotFound");
+            return View(producersDetails);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,ProfilePictureUrl,Bio")] Producer producer)
+        {
+            if (!ModelState.IsValid) return View(producer);
+
+            if(id == producer.Id)
+            {
+                await _service.UpdateAsync(id, producer);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(producer);
+        }
     }
 }

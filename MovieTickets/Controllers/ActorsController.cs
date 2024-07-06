@@ -42,7 +42,7 @@ namespace MovieTickets.Controllers
         {
             var actorsDetails = await _service.GetByIdAsync(id);
 
-            if(actorsDetails == null) return View("Empty");
+            if(actorsDetails == null) return View("NotFound");
             return View(actorsDetails);
         }
 
