@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MovieTickets.Data;
 using MovieTickets.Data.Services;
+using MovieTickets.Models;
 
 namespace MovieTickets.Controllers
 {
@@ -37,9 +38,25 @@ namespace MovieTickets.Controllers
             ViewBag.Producers = new SelectList(moviesDropdownsData.Producers, "Id", "FullName");
             ViewBag.Actors = new SelectList(moviesDropdownsData.Actors, "Id", "FullName");
 
-
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create(NewMovieVM movie)
+        {
+            if (!ModelState.IsValid)
+            {
+                var moviesDropdownsData = await _service.GetNewMovieDropdownsValues();
+
+                ViewBag.Cinemas = new SelectList(moviesDropdownsData.Cinemas, "Id", "Name");
+                ViewBag.Producers = new SelectList(moviesDropdownsData.Producers, "Id", "FullName");
+                ViewBag.Actors = new SelectList(moviesDropdownsData.Actors, "Id", "FullName");
+
+                return View(movie);
+            }
+
+            await _service.AddNewMovieAsync(movie);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
