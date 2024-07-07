@@ -45,5 +45,7 @@ namespace MovieTickets.Controllers
             TempData["Error"] = "Wrong credential. Please, try again!";
             return View(loginVM);
         }
+
+        public IActionResult Register() => View(new RegisterVM());
     }
 }
