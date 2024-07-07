@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MovieTickets.Data;
@@ -7,6 +8,7 @@ using MovieTickets.Models;
 
 namespace MovieTickets.Controllers
 {
+    [Authorize]
     public class MoviesController : Controller
     {
         private readonly IMoviesService _service;
@@ -14,6 +16,8 @@ namespace MovieTickets.Controllers
         {
             _service = service;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllAsync(n => n.Cinema);
@@ -33,6 +37,7 @@ namespace MovieTickets.Controllers
         }
 
         //GET: Movies/Details/1
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var movieDetails = await _service.GetMovieByIdAsync(id);
@@ -40,7 +45,6 @@ namespace MovieTickets.Controllers
         }
 
         //Get: Movies/Create
-
         public async Task<IActionResult> Create()
         {
 

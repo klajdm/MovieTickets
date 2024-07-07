@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieTickets.Data.Cart;
 using MovieTickets.Data.Services;
 using MovieTickets.Data.ViewModels;
@@ -6,6 +7,7 @@ using System.Security.Claims;
 
 namespace MovieTickets.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IMoviesService _moviesService;
