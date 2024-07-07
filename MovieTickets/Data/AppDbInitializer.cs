@@ -320,8 +320,7 @@ namespace MovieTickets.Data
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
-
-                //Roles
+                // Roles
                 var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
                 if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
@@ -329,41 +328,42 @@ namespace MovieTickets.Data
                 if (!await roleManager.RoleExistsAsync(UserRoles.User))
                     await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
-                //Users
+                // Users
                 var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                string adminUserEmail = "admin@movietickets.com";
 
+                // Admin User
+                string adminUserEmail = "admin@movietickets.com";
                 var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
                 if (adminUser == null)
                 {
                     var newAdminUser = new ApplicationUser()
                     {
-                        FullName = "Admin User",
                         UserName = "admin-user",
                         Email = adminUserEmail,
-                        EmailConfirmed = true
+                        EmailConfirmed = true,
+                        FullName = "Admin User"
                     };
-                    await userManager.CreateAsync(newAdminUser, "12345678");
+                    await userManager.CreateAsync(newAdminUser, "Admin@1234");
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
                 }
 
-
+                // Standard User
                 string appUserEmail = "user@movietickets.com";
-
                 var appUser = await userManager.FindByEmailAsync(appUserEmail);
                 if (appUser == null)
                 {
                     var newAppUser = new ApplicationUser()
                     {
-                        FullName = "Application User",
                         UserName = "app-user",
                         Email = appUserEmail,
-                        EmailConfirmed = true
+                        EmailConfirmed = true,
+                        FullName = "Application User"
                     };
-                    await userManager.CreateAsync(newAppUser, "12345678");
+                    await userManager.CreateAsync(newAppUser, "User@1234");
                     await userManager.AddToRoleAsync(newAppUser, UserRoles.User);
                 }
             }
         }
+
     }
 }
