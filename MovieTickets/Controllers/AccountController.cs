@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MovieTickets.Data;
+using MovieTickets.Data.ViewModels;
 using MovieTickets.Models;
 
 namespace MovieTickets.Controllers
@@ -18,9 +19,6 @@ namespace MovieTickets.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Login() => View(new LoginVM());
     }
 }
