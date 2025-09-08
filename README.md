@@ -129,14 +129,5 @@ If you encounter any issues or have suggestions, please [open an issue](https://
 - **Author**: Klajd M
 - **Email**: klajdimurati3@gmail.com
 - **GitHub**: [@klajdm](https://github.com/klajdm)
-
-## 🙏 Acknowledgments
-
-- ASP.NET Core team for the excellent framework
-- Entity Framework Core for seamless data access
-- Bootstrap for responsive UI components
-- All contributors who help improve this project
-
----
-
+  
 ⭐ **If you find this project helpful, please give it a star!** ⭐
